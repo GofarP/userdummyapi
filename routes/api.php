@@ -12,4 +12,4 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('users', UserController::class);
 Route::get('/user', [UserController::class, 'dataWithPagination']);
 
-Route::get('/usersearch', [UserController::class, 'searchUser']);
+Route::get('/searchuser', [UserController::class, 'searchUser']);
