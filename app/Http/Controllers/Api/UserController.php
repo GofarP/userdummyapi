@@ -153,6 +153,7 @@ class UserController extends Controller
         $usersData=User::select('id','email','name')
         ->where('name','like',"%{$search}%")
         ->orWhere('email','like',"%{$search}%")
+        ->orderByDesc('created_at')
         ->paginate($limit);
 
         return response()->json($usersData);
