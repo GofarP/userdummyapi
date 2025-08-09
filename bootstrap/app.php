@@ -14,6 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'jwt.verify' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+            'jwt.cookie' => \App\Http\Middleware\JwtCookieMiddleware::class,
+            $middleware->append(\Illuminate\Http\Middleware\HandleCors::class)
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

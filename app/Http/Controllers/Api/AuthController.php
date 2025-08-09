@@ -56,7 +56,17 @@ class AuthController extends Controller
             ], 429);
         }
 
-        $newCookie = cookie('token', $token, 60, '/', null, false, true); // httpOnly
+        $newCookie = cookie(
+            'token',
+            $token,
+            60, // menit
+            '/',
+            null, // atau domain backend
+            true, // Secure: true (wajib HTTPS kalau SameSite=None)
+            true, // HttpOnly
+            false,
+            'None' // SameSite=None supaya bisa cross-site
+        );
 
         return response()->json([
             'token' => $token,
