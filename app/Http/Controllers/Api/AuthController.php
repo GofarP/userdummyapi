@@ -74,7 +74,7 @@ class AuthController extends Controller
         ])->withCookie($clearOldCookie)->withCookie($newCookie);
     }
 
-    public function gettCurrentUser()
+    public function getCurrentUser()
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();

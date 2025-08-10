@@ -13,4 +13,5 @@ Route::middleware(['jwt.auth', 'jwt.cookie'])->group(function () {
     Route::get('/user', [UserController::class, 'dataWithPagination']);
     Route::apiResource('users', UserController::class);
     Route::get('/searchuser', [UserController::class, 'searchUser']);
+    Route::get('/me',[AuthController::class,'getCurrentUser']);
 });
