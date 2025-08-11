@@ -14,4 +14,6 @@ Route::middleware(['jwt.auth', 'jwt.cookie'])->group(function () {
     Route::apiResource('users', UserController::class);
     Route::get('/searchuser', [UserController::class, 'searchUser']);
     Route::get('/me',[AuthController::class,'getCurrentUser']);
+    Route::post('/refresh',[AuthController::class,'refresh']);
+
 });

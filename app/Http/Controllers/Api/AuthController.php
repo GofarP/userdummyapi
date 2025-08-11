@@ -88,6 +88,8 @@ class AuthController extends Controller
         }
     }
 
+
+
     public function logout()
     {
         try {
@@ -102,5 +104,34 @@ class AuthController extends Controller
                 'error' => 'Gagal logout, token tidak valid'
             ], 500);
         }
+    }
+
+    public function refresh()
+    {
+        $refreshToken = request()->cookie('token');
+
+        if (!$this->isValidRefreshToken($refreshToken)) {
+            return response()->json(['error' => 'Invalid refresh token'], 401);
+        }
+
+        $newAccessToken = auth()->refresh();
+
+        return response()->json([
+            'token' => $newAccessToken,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
+        ]);
+    }
+
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60 // dalam detik
+        ]);
+
     }
 }
