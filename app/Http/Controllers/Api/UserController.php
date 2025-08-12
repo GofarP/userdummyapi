@@ -95,7 +95,7 @@ class UserController extends Controller
             'password' => 'string|min:8|nullable'
         ]);
 
-        if ($validator->fails())
+        if ($validator->fails()){
             $errors = $validator->errors();
             return response()->json([
                 'message' => 'Validation errors occured',
@@ -105,7 +105,7 @@ class UserController extends Controller
                     'password' => $errors->first('password')
                 ]
             ], 422);
-
+        }
 
         try {
             $user_data = User::where('id', $id)->update([
